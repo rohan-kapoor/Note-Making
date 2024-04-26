@@ -33,7 +33,7 @@ function App() {
   const getActiveNote = () => {
     return notes.find((note) => note.id === activeNote);
   }
-
+  //search
   const [searchText, setSearchText] = useState('');
 
   const onUpdateNote = (updatedNote) => {
@@ -49,6 +49,7 @@ function App() {
   return (
     <div className="App">
       <Sidebar
+        /*search*/
         notes={notes.filter((note) => 
         note.title.toLowerCase().includes(searchText)
       )}
