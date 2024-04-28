@@ -1,5 +1,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import BasicSyntax from "./BasicSyntax";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Main({ activeNote, onUpdateNote }) {
   const onEdit = (key, value) => {
@@ -23,6 +25,7 @@ function Main({ activeNote, onUpdateNote }) {
           onChange={(e) => onEdit("title", e.target.value)}
           autoFocus
         />
+        <BasicSyntax/>
         <textarea
           id="body"
           placeholder="Write your note here..."

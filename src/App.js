@@ -51,7 +51,7 @@ function App() {
       <Sidebar
         /*search*/
         notes={notes.filter((note) => 
-        note.title.toLowerCase().includes(searchText)
+        note.title.toLowerCase().includes(searchText) || new Date(note.lastModified).toLocaleString().includes(searchText)
       )}
         onAddNote={onAddNote}
         onDeleteNote={onDeleteNote}

@@ -9,7 +9,6 @@ function Sidebar({notes , onAddNote , onDeleteNote , activeNote , setActiveNote,
             <h1>Notify</h1>
             <button onClick={onAddNote}>Add</button>
         </div>
-        {/* search */}
         <div className='search'>
             <input onChange={(event)=>handleSearchNote(event.target.value)}type='text' id='search-input' placeholder='type to search...'/>
         </div>

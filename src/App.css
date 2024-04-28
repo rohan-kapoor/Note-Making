@@ -105,14 +105,14 @@ button:hover {
 }
 
 .main-note-edit {
-  padding: 25px;
+  padding: 20px;
 }
 
 .main-note-edit input,
 textarea {
   display: block;
   border: 1px solid #ddd;
-  margin-bottom: 20px;
+  margin-bottom: 3px;
   width: 100%;
   height: 34vh;
   padding: 10px;
