@@ -12,7 +12,7 @@ function BasicSyntax() {
   return (
     <>
       <Button variant="primary" style={{backgroundColor: '#0088CC',marginBottom: '3px', marginLeft: '1px'}} onClick={handleShow}>
-        Basic Markdown Syntax
+        Tips
       </Button>
 
       <Modal show={show} onHide={handleClose}>
