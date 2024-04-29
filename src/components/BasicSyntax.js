@@ -23,8 +23,8 @@ function BasicSyntax() {
           <table className="table">
             <thead>
               <tr>
-                <th><h5 scope="col"><b>Element</b></h5></th>
-                <th><h5 scope="col"><b>Markdown Syntax</b></h5></th>
+                <th scope="col"><h5><b>Element</b></h5></th>
+                <th scope="col"><h5><b>Markdown Syntax</b></h5></th>
               </tr>
             </thead>
             <tbody>
@@ -42,7 +42,7 @@ function BasicSyntax() {
               </tr>
               <tr>
                 <th scope="row">Blockquote</th>
-                <td>> blockquote</td>
+                <td>&gt; blockquote</td>
               </tr>
               <tr>
                 <th scope="row">Ordered List</th>
