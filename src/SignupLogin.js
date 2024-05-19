@@ -4,6 +4,7 @@ import { auth , db} from './firebase';
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail} from 'firebase/auth';
 import { ref, set } from 'firebase/database';
+import logo from './components/notify-logo.png'
 
 const SignupLogin = () => {
   const [isSignup, setIsSignup] = useState(false);
@@ -77,6 +78,8 @@ const SignupLogin = () => {
 
   return (
     <div className="signup-login-body">
+      <img src={logo} alt='Logo' className='logo'/>
+      <br/>
       <input
         type="checkbox"
         id="chk"

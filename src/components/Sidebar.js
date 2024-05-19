@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from './notify-logo.png'
 
 function Sidebar({ notes, onAddNote, onDeleteNote, activeNote, setActiveNote, handleSearchNote }) {
   const sortedNotes = notes.sort((a, b) => b.lastModified - a.lastModified);
@@ -6,7 +7,7 @@ function Sidebar({ notes, onAddNote, onDeleteNote, activeNote, setActiveNote, ha
   return (
     <div className="sidebar">
       <div className="sidebar-header">
-        <h1>Notify</h1>
+        <img src={logo} alt='Logo' className='logo-sidebar'/>
         <button onClick={onAddNote}>Add</button>
       </div>
       <div className="search">
