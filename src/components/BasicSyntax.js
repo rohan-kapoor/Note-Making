@@ -11,7 +11,7 @@ function BasicSyntax() {
 
   return (
     <>
-      <Button variant="primary" style={{backgroundColor: '#0088CC',marginBottom: '3px', marginLeft: '1px'}} onClick={handleShow}>
+      <Button variant="primary" style={{backgroundColor: '#0088CC',marginBottom: '3px', marginLeft: '1px' }} onClick={handleShow}>
         Tips
       </Button>
 

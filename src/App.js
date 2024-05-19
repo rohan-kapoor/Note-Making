@@ -1,63 +1,113 @@
-import {useEffect, useState} from 'react'
-import uuid from 'react-uuid'
+import { useEffect, useState } from 'react';
+import { ref, set, push, remove, onValue, update } from 'firebase/database';
+import { db, auth } from './firebase';
 import './App.css';
 import Main from './components/Main';
-import Sidebar from './components/Sidebar'
+import Sidebar from './components/Sidebar';
+import SignupLogin from "./SignupLogin";
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
 
 function App() {
-  const [notes, setNotes] = useState(
-    localStorage.notes ? JSON.parse(localStorage.notes) : []
-  );
-
+  const [notes, setNotes] = useState([]);
   const [activeNote, setActiveNote] = useState(false);
+  const [searchText, setSearchText] = useState('');
+  const [user, setUser] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    localStorage.setItem('notes',JSON.stringify(notes));
-  }, [notes])
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        console.log('User logged in:', currentUser);
+        setUser(currentUser);
+        fetchNotes(currentUser.uid);
+      } else {
+        console.log('No user logged in');
+        setUser(null);
+        setNotes([]);
+        navigate('/signup');
+      }
+    });
 
-  const onAddNote = () => {
+    return () => unsubscribe();
+  }, [navigate]);
+
+  const fetchNotes = (uid) => {
+    console.log('Fetching notes for UID:', uid);
+    const notesRef = ref(db, `notes/${uid}`);
+    onValue(notesRef, (snapshot) => {
+      const data = snapshot.val();
+      console.log('Notes data:', data);
+      const notesArray = data ? Object.keys(data).map((key) => ({
+        id: key,
+        ...data[key],
+      })) : [];
+      setNotes(notesArray);
+    });
+  };
+
+  const onAddNote = async () => {
+    if (!user) return;
+
     const newNote = {
-      id: uuid(),
-      title: "Untitled Note",
-      body: "",
-      lastModified: Date.now()
+      title: 'Untitled Note',
+      body: '',
+      lastModified: Date.now(),
     };
 
-    setNotes([newNote, ...notes]);
-  }
+    const newNoteRef = push(ref(db, `notes/${user.uid}`));
+    await set(newNoteRef, newNote);
+    setActiveNote(newNoteRef.key);
+  };
 
-  const onDeleteNote = (idToDelete) => {
-    setNotes(notes.filter((note) => note.id !== idToDelete));
-  }
+  const onDeleteNote = async (idToDelete) => {
+    if (!user) return;
+
+    const noteRef = ref(db, `notes/${user.uid}/${idToDelete}`);
+    await remove(noteRef);
+  };
 
   const getActiveNote = () => {
     return notes.find((note) => note.id === activeNote);
-  }
-  const [searchText, setSearchText] = useState('');
+  };
 
-  const onUpdateNote = (updatedNote) => {
-    const updatedNotesArray = notes.map((note) => {
-      if(note.id === activeNote){
-        return updatedNote;
-      }
-      return note;
-    });
-    setNotes(updatedNotesArray);
-  }
+  const onUpdateNote = async (updatedNote) => {
+    if (!user) return;
+
+    const noteRef = ref(db, `notes/${user.uid}/${activeNote}`);
+    await update(noteRef, updatedNote);
+  };
 
   return (
     <div className="App">
-      <Sidebar
-        notes={notes.filter((note) => 
-        note.title.toLowerCase().includes(searchText) || new Date(note.lastModified).toLocaleString().includes(searchText)
-      )}
-        onAddNote={onAddNote}
-        onDeleteNote={onDeleteNote}
-        activeNote={activeNote}
-        setActiveNote={setActiveNote}
-        handleSearchNote={setSearchText}
-      />
-      <Main activeNote={getActiveNote()} onUpdateNote={onUpdateNote}/>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            user ? (
+              <>
+                <Sidebar
+                  notes={notes.filter(
+                    (note) =>
+                      note.title.toLowerCase().includes(searchText.toLowerCase()) ||
+                      new Date(note.lastModified).toLocaleString().toLowerCase().includes(searchText.toLowerCase())
+                  )}
+                  onAddNote={onAddNote}
+                  onDeleteNote={onDeleteNote}
+                  activeNote={activeNote}
+                  setActiveNote={setActiveNote}
+                  handleSearchNote={setSearchText}
+                />
+                <Main activeNote={getActiveNote()} onUpdateNote={onUpdateNote} />
+              </>
+            ) : (
+              <SignupLogin />
+            )
+          }
+        />
+        <Route path="/signup" element={<SignupLogin />} />
+      </Routes>
     </div>
   );
 }

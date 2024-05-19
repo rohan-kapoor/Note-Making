@@ -84,9 +84,13 @@ button:hover {
   height: 100vh;
   background-color: #f1c27d;
 }
-.main-note-edit,
-.main-note-preview {
-  height: 50vh;
+.main-note-edit{
+  height: 55vh;
+  background-color: #fff7db;
+}
+
+.main-note-preview{
+  height: 45vh;
   background-color: #fff7db;
 }
 
@@ -96,16 +100,14 @@ button:hover {
 
 .no-active-note {
   width: 70%;
-  height: 100vh;
-  line-height: 100vh;
-  text-align: center;
   font-size: 2rem;
   color: #999;
   background-color: #fff7db;
 }
 
 .main-note-edit {
-  padding: 20px;
+  padding: 15px;
+  padding-top: 55px;
 }
 
 .main-note-edit input,
@@ -153,4 +155,127 @@ textarea {
   border-width: 2px;
   height: 30px;
   width: 15vw;
+}
+
+.main-note-edit textarea{
+  resize: none;
+}
+
+.signup-login-body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Jost', sans-serif;
+  background: linear-gradient(to bottom, #FFF7DB, #fbecb4);
+}
+
+.signup-login-main {
+  width: 350px;
+  height: 500px;
+  background: #08c;
+  overflow: hidden;
+  background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/cover;
+  border-radius: 10px;
+  box-shadow: 5px 20px 50px #000;
+}
+
+.signup-login-checkbox {
+  display: none;
+}
+
+.signup-login-signup {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.signup-login-label {
+  color: rgb(0, 170, 255);
+  font-size: 2.3em;
+  justify-content: center;
+  display: flex;
+  margin: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .5s ease-in-out;
+}
+
+.signup-login-input {
+  width: 60%;
+  height: 30px;
+  background: white;
+  justify-content: center;
+  display: flex;
+  margin: 20px auto;
+  padding: 12px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+
+.signup-login-button {
+  width: 60%;
+  height: 40px;
+  margin: 10px auto;
+  justify-content: center;
+  display: block;
+  color: #fff;
+  background: rgb(0, 170, 255);
+  font-size: 1em;
+  font-weight: bold;
+  margin-top: 30px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  transition: .2s ease-in;
+  cursor: pointer;
+}
+
+.signup-login-button:hover {
+  background: #45a9e3;
+}
+
+.signup-login-login {
+  height: 460px;
+  background: #eee;
+  border-radius: 60% / 10%;
+  transform: translateY(-180px);
+  transition: .8s ease-in-out;
+}
+
+.signup-login-login .signup-login-label {
+  color: rgb(0, 170, 255);
+  transform: scale(.6);
+}
+
+.signup-login-checkbox:checked ~ .signup-login-main .signup-login-login {
+  transform: translateY(-500px);
+}
+
+.signup-login-checkbox:checked ~ .signup-login-main .signup-login-login .signup-login-label {
+  transform: scale(1);
+}
+
+.signup-login-checkbox:checked ~ .signup-login-main .signup-login-signup .signup-login-label {
+  transform: scale(.6);
+}
+.Login_Logout_button{
+  position: fixed;
+  top: 5px;
+  right: -30px;
+  font-size: 16px;
+}
+
+.no-active-note-text{
+  position: fixed;
+  top: 45%;
+  left: 55%;
+}
+
+#sign_in_button{
+  background-color: #08c;
 }
