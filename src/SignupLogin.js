@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { auth , db} from './firebase';
 import { useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail} from 'firebase/auth';
 import { ref, set } from 'firebase/database';
 
 const SignupLogin = () => {
@@ -58,6 +58,20 @@ const SignupLogin = () => {
     } catch (error) {
       console.error('Login error:', error.message);
       alert(notValid);
+    }
+  };
+
+  const handleForgotPassword = async () => {
+    if (loginData.email) {
+      try {
+        await sendPasswordResetEmail(auth, loginData.email);
+        alert('Password reset email sent!');
+      } catch (error) {
+        console.error('Forgot Password error:', error.message);
+        alert('Error sending password reset email: ' + error.message);
+      }
+    } else {
+      alert('Please enter your email address to reset your password.');
     }
   };
 
@@ -129,6 +143,7 @@ const SignupLogin = () => {
             />
             <button type="submit" className="signup-login-button">Login</button>
           </form>
+          <button onClick={handleForgotPassword} className="forgot-password-button">Forgot Password?</button>
         </div>
       </div>
     </div>

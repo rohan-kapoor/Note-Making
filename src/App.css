@@ -279,3 +279,8 @@ textarea {
 #sign_in_button{
   background-color: #08c;
 }
+
+.forgot-password-button{
+  position: relative;
+  left: 108px;
+}
