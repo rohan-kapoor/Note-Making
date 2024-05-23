@@ -15,7 +15,6 @@ function Main({ activeNote, onUpdateNote }) {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         setUser(user);
-        console.log("Hello", user);
         const userRef = ref(db, 'users/' + user.uid);
         const snapshot = await get(userRef);
         if (snapshot.exists()) {

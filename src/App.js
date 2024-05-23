@@ -34,11 +34,9 @@ function App() {
   }, [navigate]);
 
   const fetchNotes = (uid) => {
-    console.log('Fetching notes for UID:', uid);
     const notesRef = ref(db, `notes/${uid}`);
     onValue(notesRef, (snapshot) => {
       const data = snapshot.val();
-      console.log('Notes data:', data);
       const notesArray = data ? Object.keys(data).map((key) => ({
         id: key,
         ...data[key],

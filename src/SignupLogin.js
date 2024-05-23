@@ -40,9 +40,8 @@ const SignupLogin = () => {
         username: signupData.username,
         email: signupData.email
       });
-      console.log("Registration successful!");
+      alert("Registration successful!");
       await signInWithEmailAndPassword(auth, signupData.email, signupData.password);
-      console.log("Login successful!");
       navigate('/');
     } catch (error) {
       console.error('Signup/Login error:', error.message);

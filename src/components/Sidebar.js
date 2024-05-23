@@ -29,7 +29,7 @@ function Sidebar({ notes, onAddNote, onDeleteNote, activeNote, setActiveNote, ha
               <strong>{note.title}</strong>
               <button
                 onClick={(e) => {
-                  e.stopPropagation(); // Prevent setting the active note when clicking delete
+                  e.stopPropagation();
                   onDeleteNote(note.id);
                 }}
               >
